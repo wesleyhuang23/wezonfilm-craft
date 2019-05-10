@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/local/bin/node /Users/wesleyhuang/.yarn/bin/yarn.js install
+
+PATH: 
+  /Users/wesleyhuang/.yarn/bin:/Users/wesleyhuang/.config/yarn/global/node_modules/.bin:/usr/local/php5/bin:/Users/wesleyhuang/.rbenv/shims:/opt/local/bin:/opt/local/sbin:/Users/wesleyhuang/.composer/vendor/bin:/Users/wesleyhuang/.rbenv/shims:/Users/wesleyhuang/.rbenv/bin:/usr/local/bin:/usr/local/sbin:~/bin:/Users/wesleyhuang/.rbenv/bin:/Users/wesleyhuang/.rbenv/shims:/Users/wesleyhuang/.rvm/gems/ruby-2.4.0/bin:/Users/wesleyhuang/.rvm/gems/ruby-2.4.0@global/bin:/Users/wesleyhuang/.rvm/rubies/ruby-2.4.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/wesleyhuang/.rvm/bin:/Users/wesleyhuang/.rvm/bin:/Applications/MAMP/Library/bin:/Users/wesleyhuang/.composer/vendor/bin
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  11.8.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/wesleyhuang/Documents/projects/wezonfilm-craft/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /Users/wesleyhuang/.yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/wesleyhuang/.yarn/lib/cli.js:304:30)
+      at /Users/wesleyhuang/.yarn/lib/cli.js:315:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  

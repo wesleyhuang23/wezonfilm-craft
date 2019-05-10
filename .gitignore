@@ -1,0 +1,14 @@
+/log
+/node_modules
+storage/runtime
+storage/backups
+storage/logs
+.env
+.ruby-version
+dump.sql
+web/cpresources
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
