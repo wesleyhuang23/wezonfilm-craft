@@ -2,7 +2,7 @@
 lock "3.7.2"
 
 set :application, "wezonfilm"
-set :repo_url, "https://github.com/wesleyhuang23/wezonfilm-craft-001.git"
+set :repo_url, "https://github.com/wesleyhuang23/wezonfilm-craft.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
