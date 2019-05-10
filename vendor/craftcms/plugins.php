@@ -168,4 +168,23 @@ return array (
     'developer' => 'Ether Creative',
     'developerUrl' => 'https://ethercreative.co.uk',
   ),
+  'craftcms/element-api' => 
+  array (
+    'class' => 'craft\\elementapi\\Plugin',
+    'basePath' => $vendorDir . '/craftcms/element-api/src',
+    'handle' => 'element-api',
+    'aliases' => 
+    array (
+      '@craft/elementapi' => $vendorDir . '/craftcms/element-api/src',
+    ),
+    'name' => 'Element API',
+    'version' => '2.5.4',
+    'description' => 'Create a JSON API for your elements in Craft',
+    'developer' => 'Pixel & Tonic',
+    'developerUrl' => 'https://pixelandtonic.com/',
+    'developerEmail' => 'support@craftcms.com',
+    'documentationUrl' => 'https://github.com/craftcms/element-api',
+    'changelogUrl' => 'https://raw.githubusercontent.com/craftcms/element-api/v2/CHANGELOG.md',
+    'downloadUrl' => 'https://github.com/craftcms/element-api/archive/v2.zip',
+  ),
 );
