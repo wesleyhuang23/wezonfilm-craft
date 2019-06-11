@@ -21,7 +21,7 @@ set :repo_url, "git@github.com:wesleyhuang23/wezonfilm-craft.git"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/general.php",".env"
+append :linked_files, ".env"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "storage", "web/cpresources"
