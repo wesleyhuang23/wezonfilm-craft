@@ -4,7 +4,7 @@
 # You can define all roles on a single server, or split them:
 
 # replace this ip with the ip for your production server
-server "34.219.24.188", user: "deploy", roles: %w{app db web}
+server "54.215.107.231", user: "deploy", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 

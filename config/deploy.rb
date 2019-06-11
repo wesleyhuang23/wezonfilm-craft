@@ -2,7 +2,7 @@
 lock "3.7.2"
 
 set :application, "wezonfilm"
-set :repo_url, "https://github.com/wesleyhuang23/wezonfilm-craft.git"
+set :repo_url, "git@github.com:wesleyhuang23/wezonfilm-craft.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -24,7 +24,7 @@ set :repo_url, "https://github.com/wesleyhuang23/wezonfilm-craft.git"
 append :linked_files, "config/general.php",".env"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "storage"
+append :linked_dirs, "storage", "web/cpresources"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

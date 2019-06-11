@@ -16,7 +16,7 @@ return [
     'siteName' => getenv('CRAFT_SITE_NAME'),
 
     // Environment-specific variables (see https://craftcms.com/docs/multi-environment-configs#environment-specific-variables)
-    'environmentVariables' => array(
+    'aliases' => array(
       'assetsBaseUrl' => URI_SCHEME . getenv('CRAFT_SITE_URL') . '/assets',
       'blockCrawlers' => 1,
       'isStaging' => 1
@@ -35,7 +35,7 @@ return [
     'cpTrigger' => 'admin',
 
     // Set an unique string to identify the app, prevents users from getting logged out after a capistrano deploy
-    'appId' => 'your-string-here',
+    'appId' => 'sn8973bf0sf3rad7',
 
     // Dev Mode (see https://craftcms.com/support/dev-mode)
     'devMode' => true,
