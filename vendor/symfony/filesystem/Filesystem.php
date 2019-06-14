@@ -572,7 +572,7 @@ class Filesystem
         $targetDirInfo = new \SplFileInfo($targetDir);
 
         foreach ($iterator as $file) {
-            if ($file->getPathName() === $targetDir || $file->getRealPath() === $targetDir || 0 === strpos($file->getRealPath(), $targetDirInfo->getRealPath())) {
+            if ($file->getPathname() === $targetDir || $file->getRealPath() === $targetDir || 0 === strpos($file->getRealPath(), $targetDirInfo->getRealPath())) {
                 continue;
             }
 
@@ -751,7 +751,6 @@ class Filesystem
 
             return $result;
         } catch (\Throwable $e) {
-        } catch (\Exception $e) {
         }
         \restore_error_handler();
 

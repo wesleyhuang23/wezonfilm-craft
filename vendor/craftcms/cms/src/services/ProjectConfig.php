@@ -11,6 +11,7 @@ use Craft;
 use craft\base\Plugin;
 use craft\db\Query;
 use craft\db\Table;
+use craft\elements\User;
 use craft\errors\OperationAbortedException;
 use craft\events\ConfigEvent;
 use craft\events\RebuildConfigEvent;
@@ -20,7 +21,6 @@ use craft\helpers\FileHelper;
 use craft\helpers\Json;
 use craft\helpers\Path as PathHelper;
 use craft\helpers\ProjectConfig as ProjectConfigHelper;
-use craft\helpers\StringHelper;
 use Symfony\Component\Yaml\Yaml;
 use yii\base\Application;
 use yii\base\Component;
@@ -452,12 +452,21 @@ class ProjectConfig extends Component
      */
     public function applyYamlChanges()
     {
+        $mutex = Craft::$app->getMutex();
+        $lockName = 'project-config-sync';
+
+        if (!$mutex->acquire($lockName, 15)) {
+            throw new Exception('Could not acquire a lock for the syncing project config.');
+        }
+
         $this->_applyingYamlChanges = true;
         Craft::$app->getCache()->delete(self::CACHE_KEY);
 
         $changes = $this->_getPendingChanges();
 
         $this->_applyChanges($changes);
+
+        $mutex->release($lockName);
     }
 
     /**
@@ -1826,7 +1835,7 @@ class ProjectConfig extends Component
             ->select(['id'])
             ->from([Table::FIELDLAYOUTS])
             ->where(['type' => User::class])
-            ->where(['dateDeleted' => null])
+            ->andWhere(['dateDeleted' => null])
             ->scalar();
 
         if ($layoutId) {

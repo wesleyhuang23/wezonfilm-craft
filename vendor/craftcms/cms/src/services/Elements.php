@@ -25,6 +25,7 @@ use craft\elements\Tag;
 use craft\elements\User;
 use craft\errors\ElementNotFoundException;
 use craft\errors\InvalidElementException;
+use craft\errors\OperationAbortedException;
 use craft\events\DeleteElementEvent;
 use craft\events\ElementEvent;
 use craft\events\MergeElementsEvent;
@@ -310,7 +311,7 @@ class Elements extends Component
      *
      * @param int $elementId The element’s ID.
      * @param int $siteId The site to search for the element’s URI in.
-     * @return string|null The element’s URI, or `null`.
+     * @return string|null|false The element’s URI or `null`, or `false` if the element doesn’t exist.
      */
     public function getElementUriForSite(int $elementId, int $siteId)
     {
@@ -382,6 +383,7 @@ class Elements extends Component
      * @param ElementInterface $element The element that is being saved
      * @param bool $runValidation Whether the element should be validated
      * @param bool $propagate Whether the element should be saved across all of its supported sites
+     * (this can only be disabled when updating an existing element)
      * @return bool
      * @throws ElementNotFoundException if $element has an invalid $id
      * @throws Exception if the $element doesn’t have any supported sites
@@ -391,6 +393,11 @@ class Elements extends Component
     {
         /** @var Element $element */
         $isNewElement = !$element->id;
+
+        // If this is a new element, give it a UID right away
+        if ($isNewElement && !$element->uid) {
+            $element->uid = StringHelper::UUID();
+        }
 
         // Fire a 'beforeSaveElement' event
         if ($this->hasEventHandlers(self::EVENT_BEFORE_SAVE_ELEMENT)) {
@@ -444,6 +451,7 @@ class Elements extends Component
             } else {
                 $elementRecord = new ElementRecord();
                 $elementRecord->type = get_class($element);
+                $elementRecord->uid = $element->uid;
             }
 
             // Set the attributes
@@ -473,7 +481,6 @@ class Elements extends Component
             if ($isNewElement) {
                 // Save the element ID on the element model
                 $element->id = $elementRecord->id;
-                $element->uid = $elementRecord->uid;
 
                 // If there's a temp ID, update the URI
                 if ($element->tempId && $element->uri) {
@@ -518,7 +525,7 @@ class Elements extends Component
             Craft::$app->getSearch()->indexElementAttributes($element);
 
             // Update the element across the other sites?
-            if ($propagate && $element::isLocalized() && Craft::$app->getIsMultiSite()) {
+            if (($isNewElement || $propagate) && $element::isLocalized() && Craft::$app->getIsMultiSite()) {
                 foreach ($supportedSites as $siteInfo) {
                     // Skip the master site
                     if ($siteInfo['siteId'] != $element->siteId) {
@@ -599,6 +606,13 @@ class Elements extends Component
             throw new Exception('Attempting to duplicate an element in an unsupported site.');
         }
 
+        // Set a unique URI on the clone
+        try {
+            ElementHelper::setUniqueUri($mainClone);
+        } catch (OperationAbortedException $e) {
+            // Oh well, not worth bailing over
+        }
+
         $transaction = Craft::$app->getDb()->beginTransaction();
         try {
             // Start with $element's site
@@ -626,6 +640,13 @@ class Elements extends Component
                     $siteClone->id = $mainClone->id;
                     $siteClone->siteId = $siteInfo['siteId'];
                     $siteClone->contentId = null;
+
+                    // Set a unique URI on the site clone
+                    try {
+                        ElementHelper::setUniqueUri($siteClone);
+                    } catch (OperationAbortedException $e) {
+                        // Oh well, not worth bailing over
+                    }
 
                     if (!$this->saveElement($siteClone, false, false)) {
                         throw new InvalidElementException($siteClone, 'Element ' . $element->id . ' could not be duplicated for site ' . $siteInfo['siteId']);
@@ -906,6 +927,7 @@ class Elements extends Component
      */
     public function deleteElementById(int $elementId, string $elementType = null, int $siteId = null): bool
     {
+        /** @var ElementInterface|string|null $elementType */
         if ($elementType === null) {
             /** @noinspection CallableParameterUseCaseInTypeContextInspection */
             $elementType = $this->getElementTypeById($elementId);

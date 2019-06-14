@@ -8,6 +8,7 @@
 namespace craft\services;
 
 use Craft;
+use craft\base\Field;
 use craft\base\Volume;
 use craft\db\Query;
 use craft\db\Table;
@@ -485,8 +486,6 @@ class Users extends Component
         $userRecord->lastLoginDate = $now;
         $userRecord->invalidLoginWindowStart = null;
         $userRecord->invalidLoginCount = null;
-        $userRecord->verificationCode = null;
-        $userRecord->verificationCodeIssuedDate = null;
 
         if (Craft::$app->getConfig()->getGeneral()->storeUserIps) {
             $userRecord->lastLoginAttemptIp = Craft::$app->getRequest()->getUserIP();
