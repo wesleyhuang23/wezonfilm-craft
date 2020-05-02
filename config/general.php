@@ -25,6 +25,8 @@ return [
     // Default Week Start Day (0 = Sunday, 1 = Monday...)
     'defaultWeekStartDay' => 0,
 
+    'backupOnUpdate' => false,
+
     // Enable CSRF Protection (recommended, will be enabled by default in Craft 3)
     'enableCsrfProtection' => true,
 
