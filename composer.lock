@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8116b99b5b6009538ada1b30edc6d021",
+    "content-hash": "86c0f0f4cecc3b22d29ee7fcb35ec989",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1304,6 +1304,58 @@
                 "html"
             ],
             "time": "2019-10-28T03:44:26+00:00"
+        },
+        {
+            "name": "fortrabbit/craft-object-storage",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fortrabbit/craft-object-storage.git",
+                "reference": "eb93de966c11977e3cb7cba7121e6128a36afdd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fortrabbit/craft-object-storage/zipball/eb93de966c11977e3cb7cba7121e6128a36afdd9",
+                "reference": "eb93de966c11977e3cb7cba7121e6128a36afdd9",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.1.0",
+                "league/flysystem-aws-s3-v3": "^1.0.18",
+                "php": ">=7.1.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "fortrabbit Object Storage Volume",
+                "handle": "fortrabbit-object-storage",
+                "changelogUrl": "https://raw.githubusercontent.com/fortrabbit/craft-object-storage/master/CHANGELOG.md",
+                "downloadUrl": "https://github.com/fortrabbit/craft-object-storage/archive/master.zip"
+            },
+            "autoload": {
+                "psr-4": {
+                    "fortrabbit\\ObjectStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Stark",
+                    "homepage": "https://www.fortrabbit.com/"
+                }
+            ],
+            "description": "A Craft 3 plugin that integrates with fortrabbit's S3 compatible Object Storage",
+            "keywords": [
+                "Flysystem",
+                "craftcms",
+                "fortabbit",
+                "object-storage",
+                "plugin",
+                "s3"
+            ],
+            "time": "2019-12-11T22:59:16+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
